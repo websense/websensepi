@@ -1,0 +1,76 @@
+.dived3
+{
+    font-family:sans-serif;
+    font-size:12px;
+}
+
+.dived-axis path,.dived-axis line
+{
+    fill:none;
+    stroke:#000;
+    shape-rendering:crispEdges;
+}
+
+.dived-label
+{
+    font-weight:700;
+    font-size:20px;
+    text-anchor:middle;
+}
+
+.dived-line, .dived-lineC
+{
+    fill:none;
+    stroke-width:3px;
+}
+
+.dived-brush .extent
+{
+    stroke:#fff;
+    fill-opacity:.125;
+    shape-rendering:crispEdges;
+}
+
+.dived-brush .resize
+{
+    stroke: #000;
+    stroke-width:1px;
+}
+
+.dived-circle
+{
+    stroke-width:0px;
+
+}
+
+.dived-circleC
+{
+    stroke-opacity:0;
+    fill-opacity:1;
+}
+
+.dived-legend
+{
+    background-color:#ddd;
+    font-size:1em;
+}
+
+.dived-legendlabel 
+{
+    font-size: 16px;
+}
+
+div.dived-tooltip
+{
+    position:absolute;
+    text-align:center;
+    width:150px;
+    height:70px;
+    font:14px sans-serif;
+    background:#fff;
+    border:solid 1px #000;
+    border-radius:8px;
+    box-shadow:2px 2px 2px #888;
+    pointer-events:none;
+    padding:10px;
+}

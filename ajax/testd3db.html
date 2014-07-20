@@ -1,0 +1,72 @@
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Websense Graph from database (via file)</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/d3style.css">
+    <link rel="stylesheet" type="text/css" href="../css/simplestyle.css">
+    <!-- most simplestyle options not needed TODO-RCO tidy this up -->
+
+    <script src="../dived3/d3.js"></script>
+    <script src="../dived3/dived3.js"></script>
+    <script src="../dived3/bignumber.js"></script>
+    
+</head>
+<body>
+
+
+<h2 id="title" style="margin-left:40px;"></h2>
+<div id="graph"></div>
+<div id="controls"></div>
+ 
+
+
+<script>
+//get database data from newfile query process
+d3.json("newfile.php", function(data) {
+	console.log("Data all: ", data[0], data[1],data[2]); 
+	var dateFormat = d3.time.format("%Y-%m-%d");
+	//var dateFormatOut = d3.time.format("%d/%m/%Y");
+    //var values = d3.keys(data[0]).filter(function(k) {return k !== "DATE";});
+    var values = ["MINTEMP", "MAXTEMP", "RAINFALL"];
+    console.log("Values: ", values);
+    
+ 	data.forEach(function(d) {
+ 		d.time = dateFormat.parse(d.DATE);
+ 		//console.log(d.time); //why are these out of order?
+ 		d.phenomena = values.map(function(name,i) {
+ 			// ph has identifier num and string and convert value string to number
+			return {id: i, name: name, value: +d[name]}; }); //+d[name]
+ 	});
+ 	
+ 	 //data sort time order - good but seems messy
+ 	 data.sort(function(a,b){return a.time - b.time});
+ 
+ 	 
+ title = "Test D3: Karratha BoM from " + 
+ 			data[0].time.toDateString() + " to " + 
+ 			data[data.length-1].time.toDateString();  
+ d3.select("#title").text(title);
+ 
+ d3.select("#graph")
+     .datum(data)
+     .call(dived3.newGraph(["line","line","bar"]).
+    		 showTooltips(true).
+    		 context(true).
+    		 showLegend(true).
+    		 legendLabels(["MinT","MaxT","Rain"]).
+    		 axesLabels(["MinT/MaxT","Rain"]).
+    		 axisGroup([1,1,0]));
+
+d3.select("#controls")
+         .datum(data)
+         .call(dived3.controls.setup());
+ 
+});
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+#script to remove Macos \r from scripts
+cp $1 tmp1.txt
+#tr -d '\015' > 41 < 41.txt
+tr '\015' '\n' > tmp2.txt < tmp1.txt
+tr '\t\t' '\t' > tmp3.txt < tmp2.txt
+mv tmp3.txt $1
+rm tmp2.txt
+rm tmp1.txt
+

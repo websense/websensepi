@@ -1,0 +1,7 @@
+
+BEGIN;
+CREATE TABLE co2 (tdate DATE, ttime TIME, nodeid NUMERIC, ppm NUMERIC, dBm NUMERIC, UNIQUE (tdate, ttime) ON CONFLICT IGNORE);
+
+CREATE TABLE bom (tdate DATE, mintemp NUMERIC, maxtemp NUMERIC, rainfall NUMERIC, UNIQUE (tdate) ON CONFLICT IGNORE);
+
+COMMIT;
